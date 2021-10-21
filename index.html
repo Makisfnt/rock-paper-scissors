@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<script>
+    let outcome = "";
+    let playerInput = "";
+    let playerChoice = "";
+    game();
+
+    function game() {
+        let playerWins = 0;
+        let computerWins = 0;
+        let ties = 0;
+
+        for (let i = 0; i < 5; i++) {
+            playerInput = prompt("Choose your weapon! (Rock/paper/scissors)");
+            playerChoice = playerInput.toLowerCase();
+            const computerChoice = computerPlay();
+            let winnerMessage = playRound(playerChoice, computerChoice);
+            if (winnerMessage.charAt(4) === " ") {
+                ties++;
+            } else if (winnerMessage.charAt(4) === "w") {
+                playerWins++;
+            } else {
+                computerWins++;
+            }
+            alert(winnerMessage);
+        }
+        if (playerWins > computerWins) {
+            outcome = "Congratulations! You won " + playerWins + " to " + computerWins + "!";
+        } else if (playerWins === computerWins) {
+            outcome = "It's a tie! " + playerWins + " - " + computerWins + "!";
+        } else {
+            outcome = "Oh no! You lost " + computerWins + " to " + playerWins + "!";
+        }
+        console.log(outcome);
+    }
+
+    function playRound(playerChoice, computerChoice) {
+
+        let message = String;
+        if (playerChoice === "rock" && computerChoice === "rock") {
+            message = "It's a tie!";
+        } else if (playerChoice === "rock" && computerChoice === "paper") {
+            message = "You lose! Paper beats rock!";
+        } else if (playerChoice === "rock" && computerChoice === "scissors") {
+            message = "You win! Rock beats scissors!";
+        } else if (playerChoice === "paper" && computerChoice === "rock") {
+            message = "You win! Paper beats rock!";
+        } else if (playerChoice === "paper" && computerChoice === "paper") {
+            message = "It's a tie!";
+        } else if (playerChoice === "paper" && computerChoice === "scissors") {
+            message = "You lose! Scissors beat paper!";
+        } else if (playerChoice === "scissors" && computerChoice === "rock") {
+            message = "You lose! Rock beats scissors!";
+        } else if (playerChoice === "scissors" && computerChoice === "paper") {
+            message = "You win! Scissors beat paper!";
+        } else {
+            message = "It's a tie!";
+        }
+        return message;
+    }
+
+    function computerPlay() {
+        const randomNumber = getRandomInt(3) + 1;
+
+        if (randomNumber == 1) {
+            return "rock";
+        } else if (randomNumber == 2) {
+            return "paper";
+        } else {
+            return "scissors";
+        }
+    }
+
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+    }
+</script>
